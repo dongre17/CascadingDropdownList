@@ -1,3 +1,5 @@
-<p>
-  dropdown works!
-</p>
+<ul>
+  <li *ngFor="let node of node.children">
+    <app-dropdown  [node]="node"></app-dropdown>
+  </li>
+</ul>
