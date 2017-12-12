@@ -1,5 +1,12 @@
-<ul>
-  <li *ngFor="let node of node.children">
-    <app-dropdown  [node]="node"></app-dropdown>
-  </li>
-</ul>
+<div *ngIf="node">
+  <div>{{node.childNode}}</div>
+  <select [(ngModel)]="selectedValue">
+    <option *ngFor="let item of node.children" [ngValue]="item">
+      {{item.name}}
+    </option>
+  </select>
+
+  <div *ngIf="selectedValue && selectedValue.children.length > 0">
+    <app-dropdown [node]="selectedValue"></app-dropdown>
+  </div>
+</div>
