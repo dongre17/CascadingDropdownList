@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { DropdownComponent } from '../app/dropdown/dropdown.component';
+import { CascadeService } from './cascade.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -7,7 +8,7 @@ import { DropdownComponent } from '../app/dropdown/dropdown.component';
 })
 export class AppComponent {
   title = 'app';
-
+  result;
   node =
     {
       'name': 'root',
@@ -15,16 +16,18 @@ export class AppComponent {
       'children':
         [
           {
-            'childNode': 'Country',
             'name': 'Asia',
+            'selected' : true,
+            'childNode': 'Country',
             'children': [
               {
-                'childNode': 'State',
                 'name': 'India',
+                'childNode': 'State',
                 'children': [
                   {
                     'childNode': 'City',
                     'name': 'MH',
+                    'selected' : true,
                     'children': [
                       {
                         'childNode': null,
@@ -34,7 +37,7 @@ export class AppComponent {
                     ]
                   },
                   {
-                    'title': 'City',
+                    'childNode': 'City',
                     'name': 'MP',
                     'children': [
                       {
@@ -44,6 +47,7 @@ export class AppComponent {
                       },
                       {
                         'childNode': null,
+                        'selected' : true,
                         'name': 'Indore',
                         'children': null
                       },
@@ -54,9 +58,15 @@ export class AppComponent {
                       }
                     ]
                   }
-
                 ]
+              },
+              {
+                'childNode': null,
+                'name': 'Nepal',
+                'children': null,
+                'selected' : true,
               }
+
             ]
           },
           {
@@ -70,7 +80,8 @@ export class AppComponent {
               },
               {
                 'childNode': '',
-                'name': 'Chicago',
+                'name': 'Data',
+                'selected' : true,
                 'children': null
               },
               {
@@ -83,4 +94,10 @@ export class AppComponent {
         ]
     };
 
+  constructor(private _cascadeService: CascadeService) { }
+
+  handleEmitter = (value) => {
+
+    this.result = value;
+  }
 }

@@ -1,12 +1,15 @@
-<div *ngIf="node">
-  <div>{{node.childNode}}</div>
-  <select [(ngModel)]="selectedValue">
+<div *ngIf="node" class="form-group">
+  <label for="node.childNode">{{node.childNode}}</label>
+
+  <select id="node.childNode" [(ngModel)]="selectedValue" (change)="updateValue()" class="form-control selectpicker cascade-dropdown"
+    data-show-subtext="true" data-live-search="true">
     <option *ngFor="let item of node.children" [ngValue]="item">
       {{item.name}}
     </option>
   </select>
 
-  <div *ngIf="selectedValue && selectedValue.children.length > 0">
-    <app-dropdown [node]="selectedValue"></app-dropdown>
-  </div>
+</div>
+
+<div *ngIf="selectedValue && selectedValue.children">
+  <app-dropdown [node]="selectedValue" [label]="selectedValue.childNode"></app-dropdown>
 </div>
