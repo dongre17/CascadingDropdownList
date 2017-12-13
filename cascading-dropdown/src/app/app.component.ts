@@ -8,93 +8,15 @@ import { CascadeService } from './cascade.service';
 })
 export class AppComponent {
   title = 'app';
-  result;
-  node =
-    {
-      'name': 'root',
-      'childNode': 'Continents',
-      'children':
-        [
-          {
-            'name': 'Asia',
-            'selected' : true,
-            'childNode': 'Country',
-            'children': [
-              {
-                'name': 'India',
-                'childNode': 'State',
-                'children': [
-                  {
-                    'childNode': 'City',
-                    'name': 'MH',
-                    'selected' : true,
-                    'children': [
-                      {
-                        'childNode': null,
-                        'name': 'Pune',
-                        'children': null
-                      }
-                    ]
-                  },
-                  {
-                    'childNode': 'City',
-                    'name': 'MP',
-                    'children': [
-                      {
-                        'childNode': null,
-                        'name': 'Bhopal',
-                        'children': null
-                      },
-                      {
-                        'childNode': null,
-                        'selected' : true,
-                        'name': 'Indore',
-                        'children': null
-                      },
-                      {
-                        'childNode': null,
-                        'name': 'Gwalior',
-                        'children': null
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                'childNode': null,
-                'name': 'Nepal',
-                'children': null,
-                'selected' : true,
-              }
+  result = {};
+  node = undefined;
 
-            ]
-          },
-          {
-            'childNode': 'Country',
-            'name': 'America',
-            'children': [
-              {
-                'childNode': '',
-                'name': 'Chicago',
-                'children': null
-              },
-              {
-                'childNode': '',
-                'name': 'Data',
-                'selected' : true,
-                'children': null
-              },
-              {
-                'childNode': '',
-                'name': 'New york',
-                'children': null
-              }
-            ]
-          }
-        ]
-    };
+  constructor(private _cascadeService: CascadeService) {
 
-  constructor(private _cascadeService: CascadeService) { }
+    this._cascadeService.getJSON().subscribe(data => {
+      this.node = data;
+    });
+  }
 
   handleEmitter = (value) => {
 
