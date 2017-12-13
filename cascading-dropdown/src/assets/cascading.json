@@ -28,13 +28,18 @@
                 },
                 {
                   "childNode": null,
-                  "selected": true,
                   "name": "Indore",
                   "children": null
                 },
                 {
                   "childNode": null,
                   "name": "Gwalior",
+                  "children": null
+                },
+                {
+                  "childNode": null,
+                  "selected": true,
+                  "name": "Chhindwara",
                   "children": null
                 }
               ]

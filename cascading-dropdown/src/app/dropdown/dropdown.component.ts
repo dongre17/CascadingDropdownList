@@ -19,20 +19,21 @@ export class DropdownComponent implements OnInit, OnChanges {
   constructor(private _cascadeService: CascadeService) { }
 
   ngOnInit() {
-    this.selectedValue = _.first(this.node['children']);
+    this.selectedValue = this.selectDefaultValue(this.node['children']);
   }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['node']) {
-      const res = _.find(this.node['children'], function (item) {
-        return (_.has(item, 'selected') && item.selected === true);
-      });
-
-      this.selectedValue = res ? res : _.first(this.node['children']);
-      this._cascadeService.result[this.label] = (this.selectedValue.name);
-      this._cascadeService.result = this.removeJsonProperties(this._cascadeService.result);
-      this.retVal.emit(this._cascadeService.result);
+      this.selectedValue = this.selectDefaultValue(this.node['children']);
+      this.updateValue();
     }
+  }
+
+  selectDefaultValue = (value) => {
+    const retVal = _.find(value, function (item) {
+      return (_.has(item, 'selected') && item.selected === true);
+    });
+    return retVal ? retVal : _.first(value);
   }
 
   updateValue = () => {

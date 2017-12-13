@@ -8,9 +8,7 @@ import 'rxjs/add/operator/catch';
 export class CascadeService {
   public result = {};
 
-
   constructor(private http: Http) { }
-
 
   public getJSON(): Observable<any> {
     return this.http.get('assets/cascading.json')

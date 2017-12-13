@@ -7,19 +7,16 @@ import { CascadeService } from './cascade.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app';
   result = {};
   node = undefined;
 
   constructor(private _cascadeService: CascadeService) {
-
     this._cascadeService.getJSON().subscribe(data => {
       this.node = data;
     });
   }
 
   handleEmitter = (value) => {
-
     this.result = value;
   }
 }
