@@ -1,5 +1,5 @@
 <div *ngIf="node">
-  <app-dropdown [node]="node" [label]="node.childNode" (retVal)=handleEmitter($event)> </app-dropdown>
+  <app-dropdown [node]="node" (retVal)=handleEmitter($event)> </app-dropdown>
 </div>
 {{result | json }}
 

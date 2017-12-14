@@ -10,20 +10,24 @@ import { CascadeService } from '../cascade.service';
 })
 export class DropdownComponent implements OnInit, OnChanges {
 
-  @Input('label') public label;
+
   @Input('node') public node;
   @Output() retVal = new EventEmitter();
 
+
   public data = [];
-  selectedValue = undefined;
+  public selectedValue = undefined;
+  public displayTitle;
   constructor(private _cascadeService: CascadeService) { }
 
   ngOnInit() {
+    this.displayTitle = this.node.childNode;
     this.selectedValue = this.selectDefaultValue(this.node['children']);
   }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['node']) {
+      this.displayTitle = this.node.childNode;
       this.selectedValue = this.selectDefaultValue(this.node['children']);
       this.updateValue();
     }
@@ -37,7 +41,7 @@ export class DropdownComponent implements OnInit, OnChanges {
   }
 
   updateValue = () => {
-    this._cascadeService.result[this.label] = (this.selectedValue.name);
+    this._cascadeService.result[this.displayTitle] = (this.selectedValue.name);
     this._cascadeService.result = this.removeJsonProperties(this._cascadeService.result);
     this.retVal.emit(this._cascadeService.result);
   }
@@ -46,7 +50,7 @@ export class DropdownComponent implements OnInit, OnChanges {
     const retVal = values;
     let isValid = false;
     Object.keys(retVal).forEach((key) => {
-      if (key === this.label) {
+      if (key === this.displayTitle) {
         isValid = true;
       } else if (isValid) {
         delete retVal[key];
