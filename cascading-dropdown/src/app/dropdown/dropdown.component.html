@@ -1,8 +1,7 @@
 <div *ngIf="node" class="form-group">
   <label for="node.childNode">{{node.childNode}}</label>
 
-  <select id="node.childNode" [(ngModel)]="selectedValue" (change)="updateValue()" class="form-control selectpicker cascade-dropdown"
-    data-show-subtext="true" data-live-search="true">
+  <select id="node.childNode" [(ngModel)]="selectedValue" (change)="updateValue()" class="form-control cascade-dropdown">
     <option *ngFor="let item of node.children" [ngValue]="item">
       {{item.name}}
     </option>
